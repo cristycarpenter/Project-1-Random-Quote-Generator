@@ -35,3 +35,13 @@ var quotes = [
 function getRandomQuote(){
   return quotes[Math.floor(Math.random() * quotes.length)];
 }
+
+//Prints new quote to page when user clicks "Show another quote" button.
+function printQuote(){
+  var quoteGenerated = getRandomQuote();
+  var quoteToDisplay = '<p class="quote">' + quoteGenerated.quote + '</p>';
+  quoteToDisplay += '<p class="source">' + quoteGenerated.source;
+  quoteToDisplay += '<span class="citation">' + quoteGenerated.citation + '</span>';
+  quoteToDisplay += '<span class="year">' + quoteGenerated.year + '</span></p>';
+  document.getElementById('quote-box').innerHTML = quoteToDisplay;
+}
