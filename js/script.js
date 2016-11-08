@@ -9,22 +9,26 @@ var quotes = [
     quote: "My quote",
     source: "The source of my quote.",
     citation: "A citation from my quote.",
-    year: "The year the quote was created."
+    year: "The year the quote was created.",
+    tags: "Quote tags."
   },
   {
     quote: "My quote2",
     source: "The source of my quote2.",
     citation: "A citation from my quote2.",
+    tags: "Quote tags2."
   },
   {
     quote: "My quote3",
     source: "The source of my quote3.",
     citation: "A citation from my quote3.",
-    year: "The year the quote was created3."
+    year: "The year the quote was created3.",
+    tags: "Quote tags3"
   },
   {
     quote: "My quote4",
-    source: "The source of my quote4."
+    source: "The source of my quote4.",
+    tags: "Quote tags4."
   }
 ];
 
@@ -39,7 +43,7 @@ function randomValue(){
 }
 
 //Generates and concats rgb values for changing the background color.
-function randomColor(){
+function randomBackgroundColor(){
   var color = 'rgb(';
   color += randomValue() + ',';
   color += randomValue() + ',';
@@ -49,8 +53,11 @@ function randomColor(){
 
 //Prints new quote to page when user clicks "Show another quote" button.
 function printQuote(){
-  var backgroundColor = randomColor();
-  document.body.style.background = backgroundColor;
+
+  //Changes background color on click.
+  document.body.style.background = randomBackgroundColor();
+
+  //Displays a random quote and additional information if available.
   var quoteGenerated = getRandomQuote();
   var quoteToDisplay = '<p class="quote">' + quoteGenerated.quote + '</p>';
   quoteToDisplay += '<p class="source">' + quoteGenerated.source;
@@ -60,5 +67,6 @@ function printQuote(){
   if(quoteGenerated.hasOwnProperty('year') === true){
     quoteToDisplay += '<span class="year">' + quoteGenerated.year + '</span></p>';
   }
+  quoteToDisplay += '<p class="tags">' + quoteGenerated.tags + '</p>';
   document.getElementById('quote-box').innerHTML = quoteToDisplay;
 }
