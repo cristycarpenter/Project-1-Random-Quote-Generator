@@ -30,3 +30,8 @@ var quotes = [
     year: "The year the quote was created4."
   }
 ];
+
+//Calculates random index number that pulls one random quote from the array.
+function getRandomQuote(){
+  return quotes[Math.floor(Math.random() * quotes.length)];
+}
