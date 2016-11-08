@@ -33,8 +33,24 @@ function getRandomQuote(){
   return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
+//Generates random number betwee 0 and 256.
+function randomValue(){
+  return Math.floor(Math.random() * 256 );
+}
+
+//Generates and concats rgb values for changing the background color.
+function randomColor(){
+  var color = 'rgb(';
+  color += randomValue() + ',';
+  color += randomValue() + ',';
+  color += randomValue() + ')';
+  return color;
+}
+
 //Prints new quote to page when user clicks "Show another quote" button.
 function printQuote(){
+  var backgroundColor = randomColor();
+  document.body.style.background = backgroundColor;
   var quoteGenerated = getRandomQuote();
   var quoteToDisplay = '<p class="quote">' + quoteGenerated.quote + '</p>';
   quoteToDisplay += '<p class="source">' + quoteGenerated.source;
