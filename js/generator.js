@@ -2,9 +2,13 @@
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
+//Starts timer to print quote every 30 seconds.
+var timer = setInterval(printQuote, 30000);
+
+//Will hold already displayed quotes.
 var quotesDisplayed = [];
 
-//Calculates random index number that pulls one random quote from the array.
+//Calculates random index number that pulls one quote from the array.
 function getRandomQuote(){
   return quotes[Math.floor(Math.random() * quotes.length)];
 }
@@ -14,7 +18,7 @@ function randomValue(){
   return Math.floor(Math.random() * 256 );
 }
 
-//Generates and concats rgb values for changing the background color.
+//Generates and concats rgb values for changing the page's background color.
 function randomBackgroundColor(){
   var color = 'rgb(';
   color += randomValue() + ',';
@@ -23,6 +27,7 @@ function randomBackgroundColor(){
   return color;
 }
 
+//Prints quote to page.
 function printQuote(){
 
   //Check if the quotes array is empty. If it is, refill it.
@@ -50,7 +55,7 @@ function printQuote(){
   //Injects the HTML into the web page.
   document.getElementById('quote-box').innerHTML = quoteToDisplay;
 
-  //Logs quote to console for testing
+  //Logs quote to console for testing/visibility
   console.log(quoteToDisplay);
 
   //Grabs index of generated quote which is used to splice/remove it.
@@ -61,7 +66,10 @@ function printQuote(){
 
   //Pushes removed quote to temporary holding array until all quotes have been displayed.
   quotesDisplayed.push(removed[0]);
-}
 
-//Refreshes quote every 30 seconds.
-window.setInterval(printQuote, 30000);
+  //Clear timer if user clicks the button.
+  clearTimeout(timer);
+
+  //Timer starts again and will print a new quote in 30 seconds if user does not click button again.
+  timer = setInterval(printQuote, 30000);
+}
