@@ -1,23 +1,22 @@
 //An array storing a few quotes to pull to a web page.
-//Dummy quotes for now. I add real quotes later.
 var quotes = [
   {
     quote: "An investment in knowledge always pays the best interest.",
     source: "Benjamin Franklin",
     citation: "The Way to Wealth: Ben Franklin on Money and Success",
     year: "1758",
-    tags: "knowledge"
+    tags: "knowledge, education"
   },
   {
     quote: "It is the mark of an educated mind to be able to entertain a thought without accepting it.",
     source: "Aristotle",
     citation: "Metaphysics",
-    tags: "wisdom"
+    tags: "wisdom, thought"
   },
   {
     quote: "Be kind, for everyone you meet is fighting a harder battle.",
     source: "Plato",
-    tags: "compassion, kindess"
+    tags: "compassion, kindness"
   },
   {
     quote: "I have not failed. I've just found 10,000 ways that won't work.",
