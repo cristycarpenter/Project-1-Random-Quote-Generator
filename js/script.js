@@ -2,35 +2,7 @@
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
-//An array storing a few quotes to pull to a web page.
-//Dummy quotes for now. I add real quotes later.
-var quotes = [
-  {
-    quote: "My quote",
-    source: "The source of my quote.",
-    citation: "A citation from my quote.",
-    year: "The year the quote was created.",
-    tags: "Quote tags."
-  },
-  {
-    quote: "My quote2",
-    source: "The source of my quote2.",
-    citation: "A citation from my quote2.",
-    tags: "Quote tags2."
-  },
-  {
-    quote: "My quote3",
-    source: "The source of my quote3.",
-    citation: "A citation from my quote3.",
-    year: "The year the quote was created3.",
-    tags: "Quote tags3"
-  },
-  {
-    quote: "My quote4",
-    source: "The source of my quote4.",
-    tags: "Quote tags4."
-  }
-];
+var quotesDisplayed = [];
 
 //Calculates random index number that pulls one random quote from the array.
 function getRandomQuote(){
@@ -51,14 +23,20 @@ function randomBackgroundColor(){
   return color;
 }
 
-//Prints new quote to page when user clicks "Show another quote" button.
 function printQuote(){
+
+  //Check if the quotes array is empty. If it is, refill it.
+  if(quotes.length === 0){
+    quotes = quotesDisplayed.splice(0);
+  }
 
   //Changes background color on click.
   document.body.style.background = randomBackgroundColor();
 
-  //Displays a random quote and additional information if available.
+  //Grabs random quote from quotes array.
   var quoteGenerated = getRandomQuote();
+
+  //Builds the quote out in HTML
   var quoteToDisplay = '<p class="quote">' + quoteGenerated.quote + '</p>';
   quoteToDisplay += '<p class="source">' + quoteGenerated.source;
   if(quoteGenerated.hasOwnProperty('citation') === true){
@@ -68,5 +46,22 @@ function printQuote(){
     quoteToDisplay += '<span class="year">' + quoteGenerated.year + '</span></p>';
   }
   quoteToDisplay += '<p class="tags">' + quoteGenerated.tags + '</p>';
+
+  //Injects the HTML into the web page.
   document.getElementById('quote-box').innerHTML = quoteToDisplay;
+
+  //Logs quote to console for testing
+  console.log(quoteToDisplay);
+
+  //Grabs index of generated quote which is used to splice/remove it.
+  var quoteGeneratedIndex = quotes.indexOf(quoteGenerated);
+
+  //Removes quote just displayed to the page from quotes array.
+  var removed = quotes.splice(quoteGeneratedIndex, 1);
+
+  //Pushes removed quote to temporary holding array until all quotes have been displayed.
+  quotesDisplayed.push(removed[0]);
 }
+
+//Refreshes quote every 30 seconds.
+window.setInterval(printQuote, 30000);
